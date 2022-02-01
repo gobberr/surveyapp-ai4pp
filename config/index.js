@@ -2,7 +2,7 @@
 var path = require('path')
 module.exports = {
   build: {
-    //env: require('./' + window.env.NODE_ENV + '.env'),
+    //env: require('./' + process.env.NODE_ENV + '.env'),
     env: require('./dev.env'),
     index:  path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),

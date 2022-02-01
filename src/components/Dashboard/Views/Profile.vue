@@ -114,8 +114,8 @@ import {AUTH_UPDATE_PROFILE } from 'src/store/actions/auth'
               }
             }            
            try {
-             var http = axios.create({baseURL: window.env.VUE_APP_SBM_ENDPOINT});
-             const result = await http.put('/' + window.env.VUE_APP_ADMIN_REALM + '/users/' + this.tokenParsed.sub, body, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } })
+             var http = axios.create({baseURL: process.env.VUE_APP_SBM_ENDPOINT});
+             const result = await http.put('/' + process.env.VUE_APP_ADMIN_REALM + '/users/' + this.tokenParsed.sub, body, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } })
              console.log("RESULT", result);
              this.$notify({
                 message: 'Salvataggio profilo avvenuta con successo',

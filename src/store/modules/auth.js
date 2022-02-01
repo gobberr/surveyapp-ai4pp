@@ -5,7 +5,7 @@ const state = {
   status: '',
   hasLoadedOnce: false,
   token: localStorage.getItem('token') || '',
-  owner: window.env.VUE_APP_OWNER,
+  owner: process.env.VUE_APP_OWNER,
   id: null,
   profile: {
     email: null,

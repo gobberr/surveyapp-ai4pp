@@ -4,17 +4,17 @@ export default class AuthService {
 
     constructor(goto = '') {
         
-        const AUTH0_DOMAIN = window.env.VUE_APP_KEYCLOAK_ENDPOINT+"auth/realms/"+window.env.VUE_APP_ADMIN_REALM;
+        const AUTH0_DOMAIN = process.env.VUE_APP_KEYCLOAK_ENDPOINT+"auth/realms/"+process.env.VUE_APP_ADMIN_REALM;
         
         const settings = {
             userStore: new WebStorageStateStore({ store: window.localStorage }),
             authority: AUTH0_DOMAIN,
-            client_id: window.env.VUE_APP_CLIENT_ID,
-            client_secret: window.env.VUE_APP_CLIENT_SECRET,
-            redirect_uri: window.env.VUE_APP_PORTAL_ENDPOINT + "static/callback.html?goto=" + goto,
+            client_id: process.env.VUE_APP_CLIENT_ID,
+            client_secret: process.env.VUE_APP_CLIENT_SECRET,
+            redirect_uri: process.env.VUE_APP_PORTAL_ENDPOINT + "static/callback.html?goto=" + goto,
             response_type: "code",
             scope: "openid",
-            post_logout_redirect_uri: window.env.VUE_APP_PORTAL_ENDPOINT,
+            post_logout_redirect_uri: process.env.VUE_APP_PORTAL_ENDPOINT,
             filterProtocolClaims: true,
             loadUserInfo: true,
             automaticSilentRenew: true,

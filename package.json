@@ -6,8 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "localdev": "cross-env NODE_ENV=dev npm run dev",
-    "start": "cross-env ENABLE_ESLINT=true node build/dev-server.js",
+    "start": "cross-env NODE_ENV=dev ENABLE_ESLINT=true npm run dev",
     "build": "cross-env ENABLE_ESLINT=true node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",

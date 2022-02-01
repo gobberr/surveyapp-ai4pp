@@ -16,10 +16,10 @@ export default function refreshToken({ next }) {
                 auth.login();
             } else {
                 var http = axios.create({
-                    baseURL: window.env.VUE_APP_KEYCLOAK_ENDPOINT,          
+                    baseURL: process.env.VUE_APP_KEYCLOAK_ENDPOINT,          
                 });
-                let body = "client_id="+window.env.VUE_APP_CLIENT_ID+"&client_secret="+window.env.VUE_APP_CLIENT_SECRET+"&grant_type=refresh_token&refresh_token="+oldRefreshToken;
-                http.post('/auth/realms/'+window.env.VUE_APP_ADMIN_REALM+'/protocol/openid-connect/token', body , {headers: { "Content-Type": "application/x-www-form-urlencoded"}})
+                let body = "client_id="+process.env.VUE_APP_CLIENT_ID+"&client_secret="+process.env.VUE_APP_CLIENT_SECRET+"&grant_type=refresh_token&refresh_token="+oldRefreshToken;
+                http.post('/auth/realms/'+process.env.VUE_APP_ADMIN_REALM+'/protocol/openid-connect/token', body , {headers: { "Content-Type": "application/x-www-form-urlencoded"}})
                 .then(response => {
                     localStorage.setItem('access_token', response.data.access_token);
                     localStorage.setItem('refresh_token', response.data.refresh_token);

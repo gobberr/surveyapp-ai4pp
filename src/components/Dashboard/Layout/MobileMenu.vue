@@ -22,7 +22,6 @@
       logout() {
         this.$store.dispatch(AUTH_LOGOUT).then(() => {
           //console.log('Removed access token from Vue App session')
-          window.location = window.env.VUE_APP_KEYCLOAK_ENDPOINT + "auth/realms/" + window.env.VUE_APP_ADMIN_REALM + "/protocol/openid-connect/logout?redirect_uri=" + window.env.VUE_APP_PORTAL_ENDPOINT
         });
       }
     }

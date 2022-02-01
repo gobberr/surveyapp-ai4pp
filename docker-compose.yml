@@ -1,14 +1,12 @@
 version: '3.7'
 services:
 
-  smartvuefront:
+  vuefront:
     build:
-      context: ../Smart Vue Frontend
+      context: .
       dockerfile: Dockerfile
       args:        
-        GENERATOR_ENDPOINT: https://gwapim.dfil-tech.eu/scg/
-        PROXY_ENDPOINT: https://gwapim.dfil-tech.eu/scp/
-        # GENERATOR_ENDPOINT: http://localhost:8080/smartweb/
-        # PROXY_ENDPOINT: http://localhost:8082/smartproxy/
+        GENERATOR_ENDPOINT: https://www.example1.com
+        PROXY_ENDPOINT: https://www.example2.com
     ports:
       - 4000:80    
