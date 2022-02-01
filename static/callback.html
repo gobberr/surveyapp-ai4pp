@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Waiting...</title>
+</head>
+<body>
+  <script src="js/oidc-client.min.js"></script>
+  <script>
+
+    function parseJwt(jwt) {
+        var base64Url = jwt.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    }
+
+    var mgr = new Oidc.UserManager({ response_mode: 'query' });
+    mgr.signinRedirectCallback().then(function (user) {
+
+      localStorage.setItem('token', 'AUTH_SUCCESS')
+      localStorage.setItem('oidc_response', JSON.stringify(user))
+      localStorage.setItem('access_token', user.access_token)
+      localStorage.setItem('refresh_token', user.refresh_token)
+      localStorage.setItem('id_token', user.id_token)
+
+      // set params from authentication response
+      //localStorage.setItem('company', user.profile.company)
+      localStorage.setItem('username', user.profile.preferred_username)
+      //localStorage.setItem('walletAddress', user.profile.walletAddress)
+
+      if(user && user.access_token) {
+        var tokenParsed = parseJwt(user.access_token)
+        localStorage.setItem('partner', tokenParsed.partner);
+        localStorage.setItem('fiscalCode', tokenParsed.fiscalCode);
+        localStorage.setItem('iban', tokenParsed.iban);
+        localStorage.setItem('vat', tokenParsed.vat);
+        localStorage.setItem('firstName', tokenParsed.firstName);
+        localStorage.setItem('lastName', tokenParsed.lastName);
+        localStorage.setItem('companyName', tokenParsed.companyName);
+        localStorage.setItem('roles', tokenParsed.realm_access.roles.toString());
+        localStorage.setItem('walletAddress', tokenParsed.walletAddress);
+        localStorage.setItem('walletUser', tokenParsed.walletUser);
+        localStorage.setItem('email', tokenParsed.email)
+      }
+
+      /*
+      var role;
+      if(user.profile.role === 'projectmanager') {
+        role = 'projectManager'
+      } else if(user.profile.role === 'admin') {
+        role = 'admin'
+      } else {
+        role = 'projectMember'
+        localStorage.setItem('projectList', user.profile.projects.toString())
+      }
+      localStorage.setItem('role', role)
+      */
+
+      const goto = window.location.href.split("goto=")[1].split("&")[0]
+      console.log(goto)
+
+      if(goto){
+        window.location.href = '../#' + decodeURIComponent(goto);
+      }
+      else {
+        window.location.href = '../'
+      }
+    }).catch(function (err) {
+      console.log('err: ' + err);
+    });
+  </script>
+</body>
+</html>

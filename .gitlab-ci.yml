@@ -1,0 +1,36 @@
+image: docker:latest
+services:
+  - docker:dind
+variables:
+  DOCKER_DRIVER: overlay
+
+stages:
+  - build
+  - deploy
+
+variables:
+  CONTAINER_PROD_IMAGE: smartcommunitylab/hera-frontend:$CI_COMMIT_SHORT_SHA
+  CONTAINER_IMAGE: smartcommunitylab/hera-frontend:latest
+  APP_NAME: scf
+
+build_prod:
+  stage: build
+  script:
+    - docker login -u $DHUB_USER -p $DHUB_PASS
+    - docker build --build-arg GENERATOR_ENDPOINT=https://dev.dfil-tech.eu/smartweb/ --build-arg PROXY_ENDPOINT=https://dev.dfil-tech.eu/smartproxy/ -t $CONTAINER_PROD_IMAGE -t $CONTAINER_IMAGE .
+    - docker push $CONTAINER_PROD_IMAGE
+    - docker push $CONTAINER_IMAGE
+  only:
+    - hera
+
+deploy_prod:
+  image: smartcommunitylab/expect
+  stage: deploy
+  environment:
+    name: develop
+  script:
+    - echo "$DEV_KEY" > /tmp/key
+    - chmod 600 /tmp/key
+    - expect -f deploy.exp
+  only:
+    - hera

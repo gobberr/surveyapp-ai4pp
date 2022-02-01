@@ -1,0 +1,12 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" color="#fff">
+
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1" fill-rule="evenodd" fill="none">
+   <g id="svg_2" stroke-width="2" stroke="#fff">
+    <circle stroke="#000" fill="#fff" id="svg_3" r="5" cy="8" cx="12"/>
+    <path stroke="#000" fill="#fff" id="svg_4" d="m22.113,22.021a11.496,11.496 0 0 0 -10.113,-6.021a11.498,11.498 0 0 0 -10.11,6.014"/>
+   </g>
+  </g>
+ </g>
+</svg>
