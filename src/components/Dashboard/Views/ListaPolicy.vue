@@ -5,7 +5,7 @@
         <div class="col-12">
           <card>
             <template slot="header">
-              <h4 class="card-title text-primary ">Lista sondaggi</h4>
+              <h4 class="card-title text-primary ">Policy list</h4>
 
 
             
@@ -42,7 +42,7 @@
     },
     {
       key: 'json',
-      label: 'run'
+      label: 'See surveys'
     }
   ];
   export default {
@@ -57,35 +57,25 @@
           fields: [...tableOneColumns],
           data: []
         },
+        templateList: [],
+        filters: [],
+        rowPerPage: 10,
+        page: 0,
         creator: localStorage.getItem('username'),
 
+        selected: this.$store.state.auth.owner,
         options: [],
-        
+        templatesNotFoundMessage: false
       }
     },
     created: function() {
-      this.getSurveyList()
+      this.getPolicyList()
     },
 
     methods: {
-      getSurveyList: function() {
+      getPolicyList: function() {
         
-        let http = axios.create({
-            baseURL: 'http://localhost:3000',
-        });
-        http.get('/getActive')
-        .then(response => {
-          // console.log(response.data)
-          let surveyList = []
-          for (const [key, value] of Object.entries(response.data)) {
-            // console.log(response.data[key])
-            surveyList.push(response.data[key])
-          }
-          this.tableOne.data = surveyList          
-        })
-        .catch(e => {
-          console.log("Error: " + e.message);
-        })
+        
       },
 
       showDetails(item, index) {

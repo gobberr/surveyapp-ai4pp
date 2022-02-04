@@ -25,27 +25,29 @@
 
             <!-- DIALOG Comment -->
             <div class="row">
-              <md-dialog :md-active.sync="createComment" >
-                <md-dialog-title>Add comment to the survey</md-dialog-title>        
-                <div class="row">
-                  <div class="col-md-11">
-                    <md-field :class="messageClass" class="m-4">
-                      <label for="title">Question</label>
-                      <md-input required name="title" id="title" v-model="commentSurvey.title"/>                      
-                    </md-field> 
-                    <md-field class="m-4">
-                      <label for="name">Name (must be unique)</label>
-                      <md-input required name="name" id="name" v-model="commentSurvey.name"/>
-                      
-                    </md-field> 
-                    <div class="m-4">
-                      <md-checkbox name="required" id="required" v-model="commentSurvey.isRequired" class="md-primary">Required</md-checkbox>
-                    </div>  
-                    <div class="m-4">
-                      <span style="color:red; font-size:16px" v-if="showCompileError">*Compile all the required fields</span>
-                    </div>                          
-                  </div>            
-                </div>
+              <md-dialog :md-active.sync="createComment">
+                <md-dialog-title>Add comment to the survey</md-dialog-title>    
+                <md-dialog-content>     
+                  <div class="row">
+                    <div class="col-md-11">
+                      <md-field :class="messageClass" class="m-4">
+                        <label for="title">Question</label>
+                        <md-input required name="title" id="title" v-model="commentSurvey.title"/>                      
+                      </md-field> 
+                      <md-field class="m-4">
+                        <label for="name">Name (must be unique)</label>
+                        <md-input required name="name" id="name" v-model="commentSurvey.name"/>
+                        
+                      </md-field> 
+                      <div class="m-4">
+                        <md-checkbox name="required" id="required" v-model="commentSurvey.isRequired" class="md-primary">Required</md-checkbox>
+                      </div>  
+                      <div class="m-4">
+                        <span style="color:red; font-size:16px" v-if="showCompileError">*Compile all the required fields</span>
+                      </div>                          
+                    </div>            
+                  </div>
+                </md-dialog-content>
                 <md-dialog-actions>
                   <md-button class="md-primary" @click="createComment = false; showCompile = false">Chiudi</md-button>
                   <md-button class="md-primary" @click="addCommentToSurvey(commentSurvey)">Salva</md-button>
@@ -56,28 +58,30 @@
             <!-- DIALOG Ranking -->
             <div class="row">
               <md-dialog :md-active.sync="createRanking" >
-                <md-dialog-title>Add ranking to the survey</md-dialog-title>        
-                <div class="row">
-                  <div class="col-md-11">
-                    <md-field class="m-4">
-                      <label for="title">Question</label>
-                      <md-input required name="title" id="title" v-model="rankingSurvey.title"/>                      
-                    </md-field>    
-                    <md-field class="m-4">
-                      <label for="name">Name (must be unique)</label>
-                      <md-input required name="name" id="name" v-model="rankingSurvey.name"/>
-                    </md-field>                 
-                    <div class="m-4">
-                      <md-chips class="md-primary shake-on-error" name="choices" id="choices" v-model="choices" :md-format="isValidChipOption" md-placeholder="Inserisci choices qui"></md-chips>
-                    </div>                    
-                    <div class="m-4">
-                      <md-checkbox name="required" id="required" v-model="rankingSurvey.isRequired" class="md-primary">Required</md-checkbox>
-                    </div>
-                    <div class="m-4">
-                      <span style="color:red; font-size:16px" v-if="showCompileError">*Compile all the required fields</span>
-                    </div>                                                              
-                  </div>                              
-                </div>
+                <md-dialog-title>Add ranking to the survey</md-dialog-title>    
+                <md-dialog-content>     
+                  <div class="row">
+                    <div class="col-md-11">
+                      <md-field class="m-4">
+                        <label for="title">Question</label>
+                        <md-input required name="title" id="title" v-model="rankingSurvey.title"/>                      
+                      </md-field>    
+                      <md-field class="m-4">
+                        <label for="name">Name (must be unique)</label>
+                        <md-input required name="name" id="name" v-model="rankingSurvey.name"/>
+                      </md-field>                 
+                      <div class="m-4">
+                        <md-chips class="md-primary shake-on-error" name="choices" id="choices" v-model="choices" :md-format="isValidChipOption" md-placeholder="Inserisci choices qui"></md-chips>
+                      </div>                    
+                      <div class="m-4">
+                        <md-checkbox name="required" id="required" v-model="rankingSurvey.isRequired" class="md-primary">Required</md-checkbox>
+                      </div>
+                      <div class="m-4">
+                        <span style="color:red; font-size:16px" v-if="showCompileError">*Compile all the required fields</span>
+                      </div>                                                              
+                    </div>                              
+                  </div>
+                </md-dialog-content>
                 <md-dialog-actions>
                   <md-button class="md-primary" @click="createRanking = false; showCompile = false">Chiudi</md-button>
                   <md-button class="md-primary" @click="addRankingToSurvey(rankingSurvey)">Salva</md-button>
@@ -87,39 +91,44 @@
 
             <!-- DIALOG Rating -->
             <div class="row">
+              <template>
               <md-dialog :md-active.sync="createRating" >
-                <md-dialog-title>Add rating to the survey</md-dialog-title>        
-                <div class="row">
-                  <div class="col-md-11">
-                    <md-field class="m-4">
-                      <label for="title">Question</label>
-                      <md-input required name="title" id="title" v-model="ratingSurvey.title"/>                      
-                    </md-field>
-                    <md-field class="m-4">
-                      <label for="name">Name (must be unique)</label>
-                      <md-input required name="name" id="name" v-model="ratingSurvey.name"/>
-                    </md-field> 
-                    <md-field class="m-4">
-                      <label for="title">minRateDescription</label>
-                      <md-input required name="minRateDescription" id="minRateDescription" v-model="ratingSurvey.minRateDescription"/>
-                    </md-field>
-                    <md-field class="m-4">                    
-                      <label for="title">maxRateDescription</label>
-                      <md-input required name="maxRateDescription" id="maxRateDescription" v-model="ratingSurvey.maxRateDescription"/>
-                    </md-field>
-                    <div class="m-4">
-                      <md-checkbox name="required" id="required" v-model="ratingSurvey.isRequired" class="md-primary">Required</md-checkbox>
-                    </div>  
-                    <div class="m-4">
-                      <span style="color:red; font-size:16px" v-if="showCompileError">*Compile all the required fields</span>
-                    </div>                                                         
-                  </div>            
-                </div>
+                
+                <md-dialog-title>Add rating to the survey</md-dialog-title>
+                <md-dialog-content>        
+                  <div class="row">
+                    <div class="col-md-11">
+                      <md-field class="m-4">
+                        <label for="title">Question</label>
+                        <md-input required name="title" id="title" v-model="ratingSurvey.title"/>                      
+                      </md-field>
+                      <md-field class="m-4">
+                        <label for="name">Name (must be unique)</label>
+                        <md-input required name="name" id="name" v-model="ratingSurvey.name"/>
+                      </md-field> 
+                      <md-field class="m-4">
+                        <label for="title">minRateDescription</label>
+                        <md-input required name="minRateDescription" id="minRateDescription" v-model="ratingSurvey.minRateDescription"/>
+                      </md-field>
+                      <md-field class="m-4">                    
+                        <label for="title">maxRateDescription</label>
+                        <md-input required name="maxRateDescription" id="maxRateDescription" v-model="ratingSurvey.maxRateDescription"/>
+                      </md-field>
+                      <div class="m-4">
+                        <md-checkbox name="required" id="required" v-model="ratingSurvey.isRequired" class="md-primary">Required</md-checkbox>
+                      </div>  
+                      <div class="m-4">
+                        <span style="color:red; font-size:16px" v-if="showCompileError">*Compile all the required fields</span>
+                      </div>                                                         
+                    </div>            
+                  </div>
+                </md-dialog-content>
                 <md-dialog-actions>
                   <md-button class="md-primary" @click="createRating = false; showCompile = false">Chiudi</md-button>
                   <md-button class="md-primary" @click="addRatingToSurvey(ratingSurvey)">Salva</md-button>
                 </md-dialog-actions>
               </md-dialog>
+              </template>
             </div>
   
 
@@ -339,13 +348,7 @@
   };
 </script>
 
-<style scoped>
-  #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-  }
+<style>
   th {
     color: black !important;
     font-weight: bold !important;
@@ -359,7 +362,7 @@
   .md-checkbox {
     display: flex;
   }
-  .md-dialog{
-    width: 50%;
+  .md-dialog {
+    width: 90%;
   }
 </style>

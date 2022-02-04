@@ -11,7 +11,7 @@ COPY . .
 
 ARG NODE_ENV
 
-RUN npm run build:${NODE_ENV} && npm run update-env-${NODE_ENV}
+RUN npm run build
 
 # production stage
 FROM nginx:stable-alpine as production-stage

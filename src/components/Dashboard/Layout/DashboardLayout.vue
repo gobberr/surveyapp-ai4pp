@@ -4,7 +4,7 @@
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/overview">
         <i class="nc-icon nc-grid-45"></i>
-        <p>Home</p>
+        <p>Results</p>
       </sidebar-link>
 
       
@@ -17,6 +17,12 @@
         <i class="nc-icon nc-single-copy-04"></i>
         <p>Creazione sondaggi</p>
       </sidebar-link>
+
+      <sidebar-link to="/policyList">
+        <i class="nc-icon nc-single-copy-04"></i>
+        <p>Lista policy</p>
+      </sidebar-link>
+
 
       <!--
       <sidebar-link to="/compileSurvey/1">

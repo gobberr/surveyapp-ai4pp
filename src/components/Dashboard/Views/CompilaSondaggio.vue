@@ -85,28 +85,44 @@ export default {
   methods: {
     getSurveyDetails: function(surveyId) {
         
-        let http = axios.create({
-            baseURL: 'http://localhost:3000',
-        });
-        http.get('/getSurvey?surveyId=' + surveyId)
-        .then(response => {
-          console.log(response.data)
-          this.json = response.data
-          const selectedSurvey = JSON.parse(localStorage.getItem('selectedSurvey'))
-          this.surveyName = selectedSurvey.name
+      let http = axios.create({
+          baseURL: 'http://localhost:3000',
+      });
+      http.get('/getSurvey?surveyId=' + surveyId)
+      .then(response => {
+        console.log(response.data)
+        this.json = response.data
+        const selectedSurvey = JSON.parse(localStorage.getItem('selectedSurvey'))
+        this.surveyName = selectedSurvey.name
+        
+        this.json = selectedSurvey.json 
+        model = new SurveyVue.Model(this.json);
+        model.onComplete.add(function(sender) {
+          // console.log(sender.data)
           
-          this.json = selectedSurvey.json 
-          model = new SurveyVue.Model(this.json);
-          model.onComplete.add(function(sender) {
-            console.log(sender.data)
+          let http = axios.create({
+              baseURL: 'http://localhost:3000',
+          });
+
+          const queryString = new URLSearchParams();
+          queryString.append('postId', surveyId);
+          queryString.append('surveyResult', JSON.stringify(sender.data));
+
+          http.post('/post', queryString)
+          .then(response => {
+            console.log(response.data)        
           })
-          this.survey = model
-          
+          .catch(e => {
+            console.log("Error: " + e.message);
+          })
         })
-        .catch(e => {
-          console.log("Error: " + e.message);
-        })
-      },
+        this.survey = model      
+      })
+      .catch(e => {
+        console.log("Error: " + e.message);
+      })
+    }
+
   }
 };
 </script>
